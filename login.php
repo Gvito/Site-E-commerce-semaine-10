@@ -7,14 +7,25 @@ if(!empty($_POST)) {
   foreach ($_POST as $key => $value) {
     $_POST[$key] = htmlspecialchars($value);
   }
-  //On récupère les utilisateurs stockés sur le site (ici pour l'exercice ils sont stockés dans une fonction)
-  $users = getUsers();
-  //On vérifie si on trouve une correspondance avec les infromations du formulaire
-  foreach ($users as $user) {
-    if($user["name"] === $_POST["user_name"] && $user["password"] === $_POST["user_password"]) {
+
+  // try et catch pour vérifier la présence d'une erreur à l'intérieur du PDO
+  try {
+  // serveur MySQL
+  $bdd = new PDO('mysql:host=localhost;dbname=Site_E-commerce', 'phpmyadmin', 'adepsimplon05', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+  }
+  catch(Exception $e) {
+     // arret de la page et affiche le message d'erreur
+     die('Erreur : ' . $e->getMessage());
+  }
+  // On récupère tout le contenu de la table Users
+  $users = $bdd->query('SELECT * FROM Users');
+// On affiche chaque entrée une à une
+while ($donnees = $users->fetch()) {
+    // On vérifie si on trouve une correspondance avec les infromations du formulaire
+    if($donnees["user_name"] === $_POST["user_name"] && $donnees["user_password"] === $_POST["user_password"]) {
       //Si c'est le cas on démarre une session pour y stocker les informations de l'utilisateur
       session_start();
-      $_SESSION["user"] = $user;
+      $_SESSION["user"] = $donnees;
       $_SESSION["basket"] = [];
       $_SESSION["basketAmount"] = 0;
       header("Location: products.php");
