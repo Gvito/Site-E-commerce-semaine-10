@@ -1,10 +1,10 @@
 
 </main>
-<footer class="jumbotron jumbotron-fluid mb-0 mt-5 py-2 darkBg text-center">
+<div class="jumbotron jumbotron-fluid text-white bg-dark mb-auto pt-3 pb-3">
   <div class="container">
-    <p class="lead">Ce site, qui fait office d'exercice pour les étudiants a été réalisé dans le cadre de mon poste de formateur à l'ADEP de Roubaix</p>
+    <p class="lead text-center">Site E-commerce 2018. Tous Droits réservés </p>
   </div>
-</footer>
+</div>
 
 <script src="js/vendor/modernizr-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

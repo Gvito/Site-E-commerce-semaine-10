@@ -18,11 +18,16 @@
 </head>
 
 <body>
-  <section class="jumbotron jumbotron-fluid darkBg">
-    <div class="container">
-      <h1 class="display-4">Simplon commerce</h1>
-      <p class="lead">Un exemple de site intégrant Bootstrap et du PHP sans bases de données</p>
-    </div>
-  </section>
+  <header id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner mb-5">
+      <div class="carousel-item active">
+        <img class="d-block w-100" src="img/imghome.png" alt="First slide">
+        <div class="carousel-caption d-none d-md-block">
+          <h1 class="display-6 text-center">Site E-commerce</h1>
+          <p class="lead text-center font-weight-bold">Retrouver des produits électroniques aux meilleurs prix !</p>
+        </div>
+      </div>
+   </div>
+ </header>
 
   <main class="container">

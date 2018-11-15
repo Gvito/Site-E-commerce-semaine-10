@@ -1,4 +1,5 @@
 <?php
+
 //Si le formulaire n'est pas vide on le vérifie
 if(!empty($_POST)) {
   $errors ="";
@@ -42,6 +43,21 @@ if(!empty($_POST)) {
   }
   //Sinon on envoi sur la page de login avec un message de succès
   else {
+    // try et catch pour vérifier la présence d'une erreur
+    try {
+    // serveur MySQL
+    $bdd = new PDO('mysql:host=localhost;dbname=Site_E-commerce', 'phpmyadmin', 'adepsimplon05', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+    }
+    catch(Exception $e) {
+       // arret de la page et affiche le message d'erreur
+       die('Erreur : ' . $e->getMessage());
+    }
+    // on demande d'envoyer les données dans ce tableau
+    $requete = $bdd->prepare('INSERT INTO Users(user_name, user_password, user_sexe) VALUES (?, ?, ?)');
+    // on récupère les données du formulaire pour chaque input
+    $requete->execute(array($_POST['user_name'], $_POST['user_password'], $_POST['user_sexe']));
+
+
     header("Location: index.php?success=Compte créé avec succès, vous pouvez vous connecter");
     exit;
   }
