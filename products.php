@@ -9,8 +9,21 @@ if(!isset($_SESSION["user"])) {
 //On charge les fonctions pour accéder aux données
 require "Model/function.php";
 include "Template/header.php";
-//On récupère nos produits via la fonction, plus tard celle-ci effectuera une requête en base de données
-$products = getProducts();
+
+// try et catch pour vérifier la présence d'une erreur à l'intérieur du PDO
+try {
+// serveur MySQL
+$bdd = new PDO('mysql:host=localhost;dbname=Site_E-commerce', 'phpmyadmin', 'adepsimplon05', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+}
+catch(Exception $e) {
+   // arret de la page et affiche le message d'erreur
+   die('Erreur : ' . $e->getMessage());
+}
+// On récupère tout le contenu de la table Products
+$products = $bdd->query('SELECT * FROM Products');
+
+
+
 //Si une confirmation de succès
 if(isset($_GET["success"])) {
   $message = htmlspecialchars($_GET["success"]);
@@ -30,16 +43,16 @@ if(isset($_GET["success"])) {
           <article class="col-lg-6 my-4">
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title"><?php echo $product["name"] ?></h5>
-                <p class="card-text"><?php echo $product["description"] ?></p>
+                <h5 class="card-title"><?php echo $product["ProductName"] ?></h5>
+                <p class="card-text"><?php echo $product["Description"] ?></p>
               </div>
               <ul class="list-group list-group-flush">
-                <li class="list-group-item">Prix : <?php echo $product["price"] ?></li>
-                <li class="list-group-item">Lieu de production: <?php echo $product["made_in"] ?></li>
-                <li class="list-group-item">Catégorie : <?php echo $product["category"] ?></li>
+                <li class="list-group-item">Prix : <?php echo $product["ProductPrice"] ?></li>
+                <li class="list-group-item">Lieu de production: <?php echo $product["ProductMade_in"] ?></li>
+                <li class="list-group-item">Catégorie : <?php echo $product["ProductCategory"] ?></li>
               </ul>
               <div class="card-body">
-                <a href="<?php echo 'single.php?id=' . $product['id']; ?>" class="btn lightBg">Voir</a>
+                <a href="<?php echo 'single.php?id=' . $product['ProductID']; ?>" class="btn lightBg">Voir</a>
               </div>
             </div>
           </article>

@@ -1,6 +1,4 @@
 <?php
-//On charge le fichier avec les fonctions qui renvoient nos données
-require "Model/function.php";
 //On vérifie si le formulaire a été rempli
 if(!empty($_POST)) {
   //On nettoie les entrées du formulaire
@@ -22,7 +20,7 @@ if(!empty($_POST)) {
 // On affiche chaque entrée une à une
 while ($donnees = $users->fetch()) {
     // On vérifie si on trouve une correspondance avec les infromations du formulaire
-    if($donnees["user_name"] === $_POST["user_name"] && $donnees["user_password"] === $_POST["user_password"]) {
+    if($donnees["name"] === $_POST["user_name"] && $donnees["password"] === $_POST["user_password"]) {
       //Si c'est le cas on démarre une session pour y stocker les informations de l'utilisateur
       session_start();
       $_SESSION["user"] = $donnees;

@@ -53,7 +53,7 @@ if(!empty($_POST)) {
        die('Erreur : ' . $e->getMessage());
     }
     // on demande d'envoyer les données dans ce tableau
-    $requete = $bdd->prepare('INSERT INTO Users(user_name, user_password, user_sexe) VALUES (?, ?, ?)');
+    $requete = $bdd->prepare('INSERT INTO Users(name, password, sexe) VALUES (?, ?, ?)');
     // on récupère les données du formulaire pour chaque input
     $requete->execute(array($_POST['user_name'], $_POST['user_password'], $_POST['user_sexe']));
 
