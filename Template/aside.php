@@ -1,6 +1,7 @@
 <aside class="col-lg-3">
-  <i class="fas fa-user-ninja fa-4x mb-3"></i>
+  <!-- <i class="fas fa-user-alt fa-4x mb-3"></i> -->
   <ul class="list-group">
+    <i class="list-group-item fas fa-user-alt fa-4x text-center"></i>
     <?php
     //On boucle sur l'utilisateur stocké en session pour afficher toutes ses informations
     foreach ($_SESSION["user"] as $key => $value) {
@@ -8,8 +9,8 @@
     }
     ?>
   </ul>
-  <a href="basket.php" class="my-3">Votre panier</a>
-  <ul class="list-group">
+  <ul class="list-group my-3">
+    <li class="list-group-item text-center"><a href="basket.php"><i class="fas fa-shopping-basket btn-lg"></i></a></li>
     <?php
       //On boucle sur le panier stocké en session pour afficher tous ses produits
       foreach ($_SESSION["basket"] as $key => $product) {

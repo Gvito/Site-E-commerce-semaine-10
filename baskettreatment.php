@@ -1,5 +1,5 @@
 <?php
-require_once "Model/function.php";
+require "Model/function.php";
 //On démarre la session pour récupérer les informations stockées
 session_start();
 
@@ -21,7 +21,7 @@ if($_GET["action"] === "add") {
   //On calcule le nouveau montant du panier
   calculateBasket();
   //On renvoie vers la page produit avec un message de succès pour confirmer l'ajout au panier
-  header("Location: products.php?success=produits ajouté au panier");
+  header("Location: products.php?success= Le produit a été ajouté au panier");
 }
 
 //Si l'action concerne un retrait de produit
@@ -33,6 +33,6 @@ if($_GET["action"] === "remove") {
   //On calcule le nouveau montant du panier
   calculateBasket();
   //On renvoie vers la page panier avec un message de succès pour confirmer le retrait du panier
-  header("Location: basket.php?success=produits retiré du panier");
+  header("Location: basket.php?success= Le produit a été retiré du panier");
 }
  ?>

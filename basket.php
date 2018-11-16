@@ -12,18 +12,21 @@ include "Template/header.php";
 //Si une confirmation de succès pour un retrait de produit
 if(isset($_GET["success"])) {
   $message = htmlspecialchars($_GET["success"]);
-  echo "<div class='alert alert-success w-50'>" . $message . "</div>";
+  echo "<div class='alert alert-success w-25 text-center mx-auto'>" . $message . "</div>";
 }
  ?>
 
- <div class="row mt-5">
+ <div class="row mt-5 mb-5">
     <section class="col-lg-9">
-      <h2>Votre panier</h2>
+      <a href="products.php" type="button" class="btn btn-primary mb-5" "text-white"><i class="fas fa-arrow-circle-left"></i> Retour à la page des produits</a>
+
+      <h2 class="mb-5">Votre panier</h2>
       <div class="container-fluide">
         <div class="row">
           <?php
-            //On boucle pour afficher tous les produits contenus dans le panier en session
-            foreach ($_SESSION["basket"] as $key => $product) {
+            if (!empty($_SESSION["basket"])) {
+              //On boucle pour afficher tous les produits contenus dans le panier en session
+              foreach ($_SESSION["basket"] as $key => $product) {
           ?>
           <article class="col-lg-6 my-4">
             <div class="card">
@@ -44,6 +47,10 @@ if(isset($_GET["success"])) {
           </article>
           <?php
           //On ferme la boucle
+              }
+            }
+            else {
+              echo '<h6 class="card p-3"> Votre panier est vide </h6>';
             }
            ?>
         </div>

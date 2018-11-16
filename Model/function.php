@@ -12,7 +12,7 @@ function getUsers() {
 function getProducts() {
   return [
     [
-      "id" => 0,
+      "id" => 1,
       "name" => "Chevrolet Impala",
       "price" => 35000,
       "stock" => false,
@@ -21,7 +21,7 @@ function getProducts() {
       "made_in"=> "USA"
     ],
     [
-      "id" => 1,
+      "id" => 2,
       "name" => "Xbox",
       "price" => 500,
       "stock" => true,
@@ -30,7 +30,7 @@ function getProducts() {
       "made_in"=> "China"
     ],
     [
-      "id" => 2,
+      "id" => 3,
       "name" => "MacBook Pro",
       "price" => 2000,
       "stock" => true,
@@ -39,7 +39,7 @@ function getProducts() {
       "made_in"=> "China"
     ],
     [
-      "id" => 3,
+      "id" => 4,
       "name" => "VTT randonnée",
       "price" => 450,
       "stock" => true,
@@ -48,7 +48,7 @@ function getProducts() {
       "made_in"=> "France"
     ],
     [
-      "id" =>4,
+      "id" =>5,
       "name" => "Rolex 1968",
       "price" => 15000,
       "stock" => true,
@@ -57,7 +57,7 @@ function getProducts() {
       "made_in"=> "Switzerland"
     ],
     [
-      "id" =>5,
+      "id" =>6,
       "name" => "A blue dress",
       "price" => 150,
       "stock" => false,

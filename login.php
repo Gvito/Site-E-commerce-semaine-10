@@ -18,7 +18,7 @@ if(!empty($_POST)) {
   // On récupère tout le contenu de la table Users
   $users = $bdd->query('SELECT * FROM Users');
 // On affiche chaque entrée une à une
-while ($donnees = $users->fetch()) {
+while ($donnees = $users->fetch(PDO::FETCH_ASSOC)) {
     // On vérifie si on trouve une correspondance avec les infromations du formulaire
     if($donnees["name"] === $_POST["user_name"] && $donnees["password"] === $_POST["user_password"]) {
       //Si c'est le cas on démarre une session pour y stocker les informations de l'utilisateur

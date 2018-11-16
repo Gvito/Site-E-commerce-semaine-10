@@ -7,7 +7,6 @@ if(!isset($_SESSION["user"])) {
   exit;
 }
 //On charge les fonctions pour accéder aux données
-require "Model/function.php";
 include "Template/header.php";
 
 // try et catch pour vérifier la présence d'une erreur à l'intérieur du PDO
@@ -27,8 +26,9 @@ $products = $bdd->query('SELECT * FROM Products');
 //Si une confirmation de succès
 if(isset($_GET["success"])) {
   $message = htmlspecialchars($_GET["success"]);
-  echo "<div class='alert alert-success w-50'>" . $message . "</div>";
+  echo "<div class='alert alert-success w-50 text-center mx-auto'>" . $message . "</div>";
 }
+
  ?>
 
  <div class="row mt-5">
@@ -52,7 +52,7 @@ if(isset($_GET["success"])) {
                 <li class="list-group-item">Catégorie : <?php echo $product["ProductCategory"] ?></li>
               </ul>
               <div class="card-body">
-                <a href="<?php echo 'single.php?id=' . $product['ProductID']; ?>" class="btn lightBg">Voir</a>
+                <a href="<?php echo 'single.php?id=' . $product['ProductID']; ?>" class="btn lightBg">Info du produit</a>
               </div>
             </div>
           </article>
