@@ -1,12 +1,13 @@
 <?php
+//start session
 session_start();
-//On charge le header
+//load page required
 require "Service/errorManager.php";
 include "Template/header.php";
-//Si un code d'erreur lié à l'enregistrement de l'utilisateur nous a été renvoyé
+//if a errer code has been sent
 if(isset($_GET["message"])) {
   $message = getErrorMessages($_GET["message"]);
-  echo "<div class='alert alert-danger w-50 mx-auto'>" . $message . "</div>";
+  echo "<div class='alert alert-danger w-50 mx-auto text-center'>" . $message . "</div>";
 }
  ?>
 
@@ -25,15 +26,19 @@ if(isset($_GET["message"])) {
   </div>
   <div class="form-group col-md-4">
       <label for="inputState">Vous êtes...</label>
-      <select id="inputState" class="form-control" name="user_sexe">
+      <select id="inputState" class="form-control text-center" name="user_sexe">
         <option <?php if(isset($_SESSION["answers"]) && $_SESSION["answers"]["user_sexe"] === "Homme"){echo "selected='selected'";} ?>>Homme</option>
         <option <?php if(isset($_SESSION["answers"]) && $_SESSION["answers"]["user_sexe"] === "Femme"){echo "selected='selected'";} ?>>Femme</option>
       </select>
-    </div>
+  </div>
   <button type="submit" class="btn lightBg">Enregistrer</button>
+  <div class="d-inline text-right">
+    <p class="mb-1"> Déjà un compte ?</p>
+    <p><a href="index.php" class="btn btn-primary">Se connecter</a></p>
+  </div>
 </form>
 
  <?php
- //On charge le footer
+ //load Footer
  include "Template/footer.php"
   ?>

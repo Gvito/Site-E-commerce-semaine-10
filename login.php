@@ -1,31 +1,40 @@
 <?php
-//On charge le fichier avec les fonctions qui renvoient nos données
-require "Model/function.php";
-//On vérifie si le formulaire a été rempli
+//Check the completed form
 if(!empty($_POST)) {
-  //On nettoie les entrées du formulaire
+  //clean enter form
   foreach ($_POST as $key => $value) {
     $_POST[$key] = htmlspecialchars($value);
   }
-  //On récupère les utilisateurs stockés sur le site (ici pour l'exercice ils sont stockés dans une fonction)
-  $users = getUsers();
-  //On vérifie si on trouve une correspondance avec les infromations du formulaire
-  foreach ($users as $user) {
-    if($user["name"] === $_POST["user_name"] && $user["password"] === $_POST["user_password"]) {
-      //Si c'est le cas on démarre une session pour y stocker les informations de l'utilisateur
+
+  // try and catch for check a erreur in the PDO
+  try {
+  // serveur MySQL
+  $bdd = new PDO('mysql:host=localhost;dbname=Site_E-commerce', 'phpmyadmin', 'adepsimplon05', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+  }
+  catch(Exception $e) {
+     // stop the page and show a error message
+     die('Erreur : ' . $e->getMessage());
+  }
+  // collect all the contents of the Users table
+  $users = $bdd->query('SELECT * FROM Users');
+// Show enter one by one
+while ($donnees = $users->fetch(PDO::FETCH_ASSOC)) {
+    // check each enters
+    if($donnees["name"] === $_POST["user_name"] && password_verify($_POST["user_password"], $donnees["password"])) {
+      //If it's good, start an session for store the users info
       session_start();
-      $_SESSION["user"] = $user;
+      $_SESSION["user"] = $donnees;
       $_SESSION["basket"] = [];
       $_SESSION["basketAmount"] = 0;
       header("Location: products.php");
-      //On met un exit pour arrêter l'execution du script, autrement la redirection n'aura pas le temps de se faire
+      //execute the script
       exit;
     }
   }
   header("Location: index.php?message=Nous n'avons aucun utilisateur avec ce nom ou ce mot de passe");
   exit;
 }
-//Si le formulaire n'est pas rempli on renvoie l'utilisateur sur la page de login avce un message
+//Redirection if the form isn't completed
 else {
   header("Location: index.php?message=Vous devez remplir les champs du formulaire");
   exit;
