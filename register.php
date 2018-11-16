@@ -1,9 +1,10 @@
 <?php
+//start session
 session_start();
-//On charge le header
+//load page required
 require "Service/errorManager.php";
 include "Template/header.php";
-//Si un code d'erreur lié à l'enregistrement de l'utilisateur nous a été renvoyé
+//if a errer code has been sent
 if(isset($_GET["message"])) {
   $message = getErrorMessages($_GET["message"]);
   echo "<div class='alert alert-danger w-50 mx-auto text-center'>" . $message . "</div>";
@@ -38,6 +39,6 @@ if(isset($_GET["message"])) {
 </form>
 
  <?php
- //On charge le footer
+ //load Footer
  include "Template/footer.php"
   ?>

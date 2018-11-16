@@ -1,10 +1,10 @@
 <?php
-//On récupère la session courante
+//collect the current session
 session_start();
-//On la vide de ses variables
+//clean of its variables
 session_unset();
-//on la détruit
+//destroy
 session_destroy();
-//On redirige l'utilisateur sur la page de login
+//redirection in the page home
 header("Location: index.php?success=Vous avez été déconnecté, à bientôt :)");
  ?>

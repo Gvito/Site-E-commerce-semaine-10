@@ -1,21 +1,21 @@
 <?php
-//On redémarre immédiatement la section pour avoir accès aux informations
+//Start session
 session_start();
-//Si aucun utilisateur est enregistré en session on renvoi à l'acceuil
+//if neither user is save in session, redirection page login
 if(!isset($_SESSION["user"])) {
   header("Location: index.php");
   exit;
 }
-//On charge les fonctions pour accéder aux données
+//load Header
 include "Template/header.php";
 
-// try et catch pour vérifier la présence d'une erreur à l'intérieur du PDO
+// try and catch for check a erreur in the PDO
 try {
 // serveur MySQL
 $bdd = new PDO('mysql:host=localhost;dbname=Site_E-commerce', 'phpmyadmin', 'adepsimplon05', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 }
 catch(Exception $e) {
-   // arret de la page et affiche le message d'erreur
+   // stop the page and show a error message
    die('Erreur : ' . $e->getMessage());
 }
 // On récupère tout le contenu de la table Products
@@ -23,8 +23,9 @@ $products = $bdd->query('SELECT * FROM Products');
 
 
 
-//Si une confirmation de succès
+//if a success confirmation
 if(isset($_GET["success"])) {
+  // secured all messages
   $message = htmlspecialchars($_GET["success"]);
   echo "<div class='alert alert-success w-50 text-center mx-auto'>" . $message . "</div>";
 }
@@ -37,7 +38,7 @@ if(isset($_GET["success"])) {
       <div class="container-fluide">
         <div class="row">
           <?php
-            //On boucle pour afficher tous les produits contenus dans la variable products
+            //loop all products in the Products Table
             foreach ($products as $key => $product) {
           ?>
           <article class="col-lg-6 my-4">
@@ -57,16 +58,17 @@ if(isset($_GET["success"])) {
             </div>
           </article>
           <?php
-          //On ferme la boucle
+          //close loop
             }
            ?>
         </div>
       </div>
     </section>
-    <!-- Aside avec les informations utilisateur -->
+    <!-- load aside -->
     <?php include "Template/aside.php"; ?>
   </div>
 
  <?php
+ // load Footer
  include "Template/footer.php"
   ?>

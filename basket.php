@@ -1,7 +1,7 @@
 <?php
-//On redémarre immédiatement la section pour avoir accès aux informations
+//start session
 session_start();
-//Si aucun utilisateur est enregistré en session on renvoi à l'acceuil
+//if neither user is save in session, redirection page login
 if(!isset($_SESSION["user"])) {
   header("Location: index.php");
   exit;
@@ -9,7 +9,7 @@ if(!isset($_SESSION["user"])) {
 
 include "Template/header.php";
 
-//Si une confirmation de succès pour un retrait de produit
+//if a success confimation for show the produit canceling
 if(isset($_GET["success"])) {
   $message = htmlspecialchars($_GET["success"]);
   echo "<div class='alert alert-success w-25 text-center mx-auto'>" . $message . "</div>";
@@ -31,22 +31,22 @@ if(isset($_GET["success"])) {
           <article class="col-lg-6 my-4">
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title"><?php echo $product["name"] ?></h5>
-                <p class="card-text"><?php echo $product["description"] ?></p>
+                <h5 class="card-title"><?php echo $product["ProductName"] ?></h5>
+                <p class="card-text"><?php echo $product["Description"] ?></p>
               </div>
               <ul class="list-group list-group-flush">
-                <li class="list-group-item">Prix : <?php echo $product["price"] ?></li>
-                <li class="list-group-item">Lieu de production: <?php echo $product["made_in"] ?></li>
-                <li class="list-group-item">Catégorie : <?php echo $product["category"] ?></li>
+                <li class="list-group-item">Prix : <?php echo $product["ProductPrice"] ?></li>
+                <li class="list-group-item">Lieu de production: <?php echo $product["ProductMade_in"] ?></li>
+                <li class="list-group-item">Catégorie : <?php echo $product["ProductCategory"] ?></li>
               </ul>
               <div class="card-body">
-                <!-- Lien pour retirer un produit du panier -->
+                <!-- remove product -->
                 <a href="<?php echo 'baskettreatment.php?key=' . $key . '&action=remove'; ?>" class="btn lightBg">Retirer du panier</a>
               </div>
             </div>
           </article>
           <?php
-          //On ferme la boucle
+          //close loop
               }
             }
             else {

@@ -1,34 +1,16 @@
 <?php
-//On redémarre immédiatement la section pour avoir accès aux informations
+require "Model/getProducts.php";
+//start session
 session_start();
-//Si aucun utilisateur est enregistré en session on renvoi à l'acceuil
+//if neither user is save in session, redirection page login
 if(!isset($_SESSION["user"])) {
   header("Location: index.php");
   exit;
 }
-//On charge les fonctions pour accéder aux données
+//load Header
 include "Template/header.php";
 
-
-// try et catch pour vérifier la présence d'une erreur à l'intérieur du PDO
-try {
-// serveur MySQL
-$bdd = new PDO('mysql:host=localhost;dbname=Site_E-commerce', 'phpmyadmin', 'adepsimplon05', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-}
-catch(Exception $e) {
-   // arret de la page et affiche le message d'erreur
-   die('Erreur : ' . $e->getMessage());
-}
-$id = intval(htmlspecialchars($_GET["id"]));
-// On récupère tout le contenu de la table Products
-$res = $bdd->query("SELECT * FROM Products WHERE ProductID = $id");
-$product = $res->fetch(PDO::FETCH_ASSOC);
-
-//On récupère notre produits via la fonction, plus tard celle-ci effectuera une requête en base de données
-
-
-// $product = $products($id);
- ?>
+?>
 
     <div class="mb-5 d-flex justify-content-between">
       <section class="h-100 w-50">
@@ -55,16 +37,17 @@ $product = $res->fetch(PDO::FETCH_ASSOC);
           </ul>
         </div>
         <?php
-          //Si le produit est disponible on met un boutton d'ajout au panier
+          //if the product is availade, add the button "add in the basket"
           if($product["ProductStock"]) {
             echo "<a href='baskettreatment.php?id=". $id . "&action=add' class='btn lightBg mb-5'>Ajouter au panier</a>";
           }
          ?>
       </section>
-    <!-- Aside avec les informations utilisateur -->
+    <!-- load Aside -->
     <?php include "Template/aside.php"; ?>
   </div>
 
  <?php
+ //load Footer
  include "Template/footer.php"
   ?>

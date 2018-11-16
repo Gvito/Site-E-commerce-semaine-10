@@ -1,13 +1,13 @@
 <?php
-//On charge le header
+//load Header
 include "Template/header.php";
-//Si un message nous a été transmis par l'url on le récupère et on l'affiche
+//If a message has been sent to us by the url it is retrieved and displayed
 if(isset($_GET["message"])) {
   $message = htmlspecialchars($_GET["message"]);
   echo "<div class='alert alert-danger w-50 text-center mx-auto'>" . $message . "</div>";
 }
 
-//Si une confirmation de succès
+//if a success comfirmation
 if(isset($_GET["success"])) {
   $message = htmlspecialchars($_GET["success"]);
   echo "<div class='alert alert-success w-50 text-center mx-auto'>" . $message . "</div>";
@@ -31,6 +31,6 @@ if(isset($_GET["success"])) {
 </form>
 
  <?php
- //On charge le footer
+ //load Footer
  include "Template/footer.php"
   ?>

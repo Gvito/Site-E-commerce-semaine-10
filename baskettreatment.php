@@ -1,38 +1,35 @@
 <?php
-require "Model/function.php";
-//On démarre la session pour récupérer les informations stockées
+require "Model/getProducts.php";
+//start session
 session_start();
 
-//Fonction qui parcours les produits du panier et calcule le montant total
+//Fonction who check all product and compute the amount
 function calculateBasket() {
   $_SESSION["basketAmount"] = 0;
   foreach ($_SESSION["basket"] as $key => $product) {
-    $_SESSION["basketAmount"] += $product["price"];
+    $_SESSION["basketAmount"] += $product["ProductPrice"];
   }
 }
 
-//Si l'action concerne un ajout au panier
+//if action Si l'action regards an addition to the cart
 if($_GET["action"] === "add") {
-  //On récupère le produit via son id et la fonction de récupèration d'un produit
-  $id = intval(htmlspecialchars($_GET["id"]));
-  $product = getProduct($id);
-  //On ajoute le produit dans l'entrée "basket" du tableau session
+  //add the product in enter "basket" of session table
   array_push($_SESSION["basket"], $product);
-  //On calcule le nouveau montant du panier
+  //compte the new amount of basket
   calculateBasket();
-  //On renvoie vers la page produit avec un message de succès pour confirmer l'ajout au panier
+  //return the products page (products.php) with a success message for confirm the addiction to the basket
   header("Location: products.php?success= Le produit a été ajouté au panier");
 }
 
-//Si l'action concerne un retrait de produit
+//If the action affected canceling of product
 if($_GET["action"] === "remove") {
-  //On récupère la clef correspondant à la position du produit dans le panier de la session
+  //collect the key matches to the product position in the session basket
   $key = intval(htmlspecialchars($_GET["key"]));
-  //On retire ce produit du tableau
+  //remove the product of table
   unset($_SESSION["basket"][$key]);
-  //On calcule le nouveau montant du panier
+  //compute le new addiction of basket
   calculateBasket();
-  //On renvoie vers la page panier avec un message de succès pour confirmer le retrait du panier
+  //Redirection in the page with success message
   header("Location: basket.php?success= Le produit a été retiré du panier");
 }
  ?>
